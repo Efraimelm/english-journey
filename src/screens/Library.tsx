@@ -159,7 +159,7 @@ export function TextPage({ n }: { n: number }) {
   }
   return (
     <div>
-      <button onClick={() => go('#/biblioteca')} className="mb-4 inline-flex items-center gap-1 text-sm text-muted hover:text-ink">
+      <button onClick={() => go('#/biblioteca')} className="mb-4 inline-flex h-10 items-center gap-1.5 rounded-full border border-line bg-surface pr-4 pl-3 text-sm font-semibold active:scale-95">
         <Icon name="back" size={16} /> Biblioteca
       </button>
       <TextReader week={week} />

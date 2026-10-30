@@ -19,7 +19,7 @@ export function Account({ auth }: { auth: AuthSession | null }) {
   const status = useSyncStatus()
   return (
     <div className="space-y-5">
-      <button onClick={() => go('#/progresso')} className="inline-flex items-center gap-1 text-sm text-muted hover:text-ink">
+      <button onClick={() => go('#/progresso')} className="inline-flex h-10 items-center gap-1.5 rounded-full border border-line bg-surface pr-4 pl-3 text-sm font-semibold active:scale-95">
         <Icon name="back" size={16} /> Meu progresso
       </button>
       <PageHeader eyebrow="Ajustes" title="Conta" />

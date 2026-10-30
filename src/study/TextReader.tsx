@@ -15,7 +15,7 @@ function matches(sentence: string, week: Week): string[] {
   return week.phrases.filter((p) => s.includes(` ${clean(p.en)} `)).map((p) => p.id)
 }
 
-export function TextReader({ week, onRead }: { week: Week; onRead?: () => void }) {
+export function TextReader({ week, onRead, inSession = false }: { week: Week; onRead?: () => void; inSession?: boolean }) {
   const text = week.text
   const [showPt, setShowPt] = useState(false)
   const [highlight, setHighlight] = useState(true)
@@ -67,7 +67,11 @@ export function TextReader({ week, onRead }: { week: Week; onRead?: () => void }
       <h2 className="mt-2 text-[30px] leading-tight font-bold tracking-tight">{text.title}</h2>
       <p className="text-muted">{text.titlePt}</p>
 
-      <div className="sticky top-0 z-10 -mx-1 mt-5 flex flex-wrap gap-2 bg-bg/90 px-1 py-2 backdrop-blur">
+      <div
+        className={`sticky z-10 -mx-1 mt-5 flex flex-wrap gap-2 bg-bg/90 px-1 py-2 backdrop-blur ${
+          inSession ? 'top-[calc(env(safe-area-inset-top)+68px)]' : 'top-[env(safe-area-inset-top)]'
+        }`}
+      >
         {playingAll ? (
           <button onClick={stopAll} className="inline-flex items-center gap-2 rounded-2xl bg-accent px-4 py-2.5 text-sm font-semibold text-on-accent">
             <Icon name="x" size={16} /> Parar

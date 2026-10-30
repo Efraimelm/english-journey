@@ -77,13 +77,17 @@ export function SessionRunner({ onExit, onNavigate }: { onExit: () => void; onNa
   }
 
   return (
-    <div className="mx-auto flex min-h-dvh max-w-xl flex-col px-4 pt-4 pb-10">
-      <div className="mb-6 flex items-center gap-4">
-        <button onClick={onExit} className="rounded-full p-2 text-muted hover:bg-surface hover:text-ink" aria-label="Sair (o progresso fica salvo)">
-          <Icon name="x" size={22} />
+    <div className="mx-auto flex min-h-dvh max-w-xl flex-col px-5 pb-10">
+      <div className="sticky top-[env(safe-area-inset-top)] z-20 -mx-5 mb-6 flex items-center gap-3 bg-bg/90 px-5 pt-3 pb-3 backdrop-blur-xl">
+        <button
+          onClick={onExit}
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-line bg-surface text-ink transition active:scale-90"
+          aria-label="Sair (o progresso fica salvo)"
+        >
+          <Icon name="x" size={20} />
         </button>
-        <Bar value={session.pos / Math.max(1, total)} />
-        <span className="w-12 text-right text-sm font-semibold text-muted tabular-nums">{Math.min(session.pos, total)}/{total}</span>
+        <Bar value={session.pos / Math.max(1, total)} className="h-2" />
+        <span className="min-w-12 text-right text-sm font-semibold text-muted tabular-nums">{Math.min(session.pos, total)}/{total}</span>
       </div>
 
       <div key={`${session.key}-${session.pos}`} className="rise flex-1">
@@ -142,7 +146,7 @@ export function SessionRunner({ onExit, onNavigate }: { onExit: () => void; onNa
       </div>
 
       {toast.length > 0 && (
-        <div className="rise fixed inset-x-4 top-4 z-50 mx-auto max-w-sm rounded-3xl bg-primary p-4 text-white shadow-2xl">
+        <div className="rise fixed inset-x-4 top-[calc(env(safe-area-inset-top)+1rem)] z-50 mx-auto max-w-sm rounded-3xl bg-primary p-4 text-white shadow-2xl">
           <div className="flex items-center gap-3">
             <div className="grid h-10 w-10 place-items-center rounded-2xl bg-mint text-[#10201a]"><Icon name="trophy" /></div>
             <div className="flex-1">
@@ -202,7 +206,7 @@ function TextStep({ week, onDone }: { week: NonNullable<ReturnType<typeof getWee
   }, [])
   return (
     <div>
-      <TextReader week={week} onRead={() => setReady(true)} />
+      <TextReader week={week} inSession onRead={() => setReady(true)} />
       <Button className="mt-8 w-full" disabled={!ready} onClick={onDone}>
         {ready ? 'Concluí a leitura' : 'Leia ou ouça o texto completo…'}
       </Button>
