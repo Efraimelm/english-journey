@@ -3,6 +3,7 @@
     "name": "English Journey",
     "slug": "english-journey",
     "owner": "efraim_01",
+    "sdkVersion": "57.0.0",
     "platforms": ["web"]
   }
 }
