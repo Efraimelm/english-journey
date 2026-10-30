@@ -1,0 +1,125 @@
+@import 'tailwindcss';
+
+/* Modo escuro "Dark Forest" (padrão) */
+:root {
+  --bg: #14251f;
+  --surface: #1a2f28;
+  --surface-2: #213a31;
+  --line: rgb(255 255 255 / 0.08);
+  --text: #eef1ec;
+  --muted: #929a94;
+  --accent: #65d6a1;
+  --accent-soft: rgb(101 214 161 / 0.14);
+  --primary: #24483b;
+  --on-accent: #10201a;
+  --danger: #f0907f;
+  --danger-soft: rgb(240 144 127 / 0.14);
+  --warn: #f2c66d;
+  color-scheme: dark;
+}
+
+/* Modo claro "Warm Ivory" */
+:root[data-theme='light'] {
+  --bg: #f5f4ef;
+  --surface: #ffffff;
+  --surface-2: #ecebe4;
+  --line: rgb(32 41 35 / 0.09);
+  --text: #202923;
+  --muted: #6e7771;
+  --accent: #24483b;
+  --accent-soft: rgb(36 72 59 / 0.09);
+  --primary: #24483b;
+  --on-accent: #f5f4ef;
+  --danger: #c4533f;
+  --danger-soft: rgb(196 83 63 / 0.1);
+  --warn: #b7851d;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-primary: var(--primary);
+  --color-on-accent: var(--on-accent);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-warn: var(--warn);
+  --color-mint: #65d6a1;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+}
+
+/* Transição suave entre exercícios */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes shake {
+  20%,
+  60% {
+    transform: translateX(-5px);
+  }
+  40%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+.shake {
+  animation: shake 0.35s ease;
+}
+
+@keyframes pop {
+  50% {
+    transform: scale(1.04);
+  }
+}
+.pop {
+  animation: pop 0.3s ease;
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .shake,
+  .pop {
+    animation: none;
+  }
+}
