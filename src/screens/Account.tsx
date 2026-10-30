@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { emptyState, replaceState, update, useStore } from '../lib/store'
-import { cloudEnabled, supabase, useSyncStatus } from '../lib/sync'
+import { cloudEnabled, signOut, supabase, useSyncStatus } from '../lib/sync'
 import type { Session as AuthSession } from '@supabase/supabase-js'
 import { Icon } from '../ui/Icon'
 import { Button, Card, PageHeader } from '../ui/kit'
@@ -58,7 +58,7 @@ export function Account({ auth }: { auth: AuthSession | null }) {
         ) : auth ? (
           <div>
             <p className="mb-4 text-sm">Conectado como <b>{auth.user.email}</b>. Use o mesmo e-mail no celular e no computador para continuar de onde parou.</p>
-            <Button variant="secondary" icon="logout" onClick={() => supabase!.auth.signOut()}>Sair da conta</Button>
+            <Button variant="secondary" icon="logout" onClick={() => signOut()}>Sair da conta</Button>
           </div>
         ) : (
           <AuthForm />

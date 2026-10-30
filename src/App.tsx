@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { addStudyTime } from './lib/progress'
 import { useStore } from './lib/store'
-import { cloudEnabled, useAuth } from './lib/sync'
+import { cloudEnabled, isKnownDevice, useAuth } from './lib/sync'
 
 const guestKey = 'english-journey:guest'
 const isGuest = () => {
@@ -75,7 +75,7 @@ export default function App() {
   if (!ready) return <div className="min-h-dvh" />
 
   // Com a nuvem configurada, é preciso entrar (ou seguir sem conta neste aparelho).
-  if (cloudEnabled && !auth && !isGuest()) {
+  if (cloudEnabled && !auth && !isGuest() && !isKnownDevice()) {
     return <Welcome />
   }
 
@@ -119,7 +119,19 @@ export default function App() {
         <div className="mt-auto px-3 text-xs text-muted">Learn English. Every single day.</div>
       </aside>
 
-      <main className="mx-auto w-full max-w-3xl px-4 pt-5 pb-28 md:px-8 md:pt-10 md:pb-12">{page}</main>
+      <main className="mx-auto w-full max-w-3xl px-4 pt-5 pb-28 md:px-8 md:pt-10 md:pb-12">
+        {cloudEnabled && !auth && isKnownDevice() && navigator.onLine && route[0] !== 'conta' && (
+          <button
+            onClick={() => go('#/conta')}
+            className="mb-4 flex w-full items-center gap-3 rounded-2xl bg-accent-soft px-4 py-3 text-left text-sm"
+          >
+            <Icon name="cloud" size={18} className="shrink-0 text-accent" />
+            <span className="flex-1">Sua conta foi desconectada. Seu progresso está salvo aqui — toque para entrar e voltar a sincronizar.</span>
+            <Icon name="chevron" size={16} className="text-muted" />
+          </button>
+        )}
+        {page}
+      </main>
 
       {/* Barra de abas (celular) */}
       <nav className="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-line bg-bg/85 backdrop-blur-xl md:hidden">

@@ -8,8 +8,38 @@ import { getState, onChange, replaceState } from './store'
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined
 const key = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
 
-export const supabase = url && key ? createClient(url, key) : null
+export const supabase =
+  url && key
+    ? createClient(url, key, {
+        // a sessão fica guardada no aparelho e é renovada sozinha: entra uma vez e pronto
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+      })
+    : null
 export const cloudEnabled = !!supabase
+
+/** Marca que este aparelho já entrou na conta: o app não volta a exigir login ao abrir. */
+const KNOWN = 'english-journey:known-user'
+export function isKnownDevice(): boolean {
+  try {
+    return localStorage.getItem(KNOWN) === '1'
+  } catch {
+    return false
+  }
+}
+function setKnownDevice(on: boolean) {
+  try {
+    if (on) localStorage.setItem(KNOWN, '1')
+    else localStorage.removeItem(KNOWN)
+  } catch {
+    /* modo privado */
+  }
+}
+
+/** Sair de propósito: aí sim volta a pedir login. */
+export async function signOut() {
+  setKnownDevice(false)
+  await supabase?.auth.signOut()
+}
 
 const TABLE = 'english_journey'
 
@@ -76,15 +106,17 @@ export function useAuth() {
   const [ready, setReady] = useState(!supabase)
   useEffect(() => {
     if (!supabase) return
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session)
-      setReady(true)
-    })
+    supabase.auth
+      .getSession()
+      .then(({ data }) => setSession(data.session))
+      .catch(() => {}) // sem internet: segue com o progresso do aparelho
+      .finally(() => setReady(true))
     const { data } = supabase.auth.onAuthStateChange((_e, s) => setSession(s))
     return () => data.subscription.unsubscribe()
   }, [])
   useEffect(() => {
     userId = session?.user.id ?? null
+    if (userId) setKnownDevice(true)
     if (userId) pull()
     else setStatus(cloudEnabled ? 'offline' : 'local')
   }, [session?.user.id])
