@@ -12,7 +12,7 @@ Atualizado em 30/10/2026.
 - [x] Texto semanal: áudio completo e frase por frase, tradução, toque na palavra, destaque das frases da semana, 4 perguntas
 - [x] 5 exercícios: escolha, complete, organize, escuta, escrita (com correção e segunda tentativa)
 - [x] Salvamento após cada resposta; retoma exatamente do mesmo passo
-- [ ] Publicado na internet e banco Supabase criado — em andamento
+- [x] Publicado em https://english-journey.expo.app (EAS Hosting) com banco Supabase próprio (RLS testado)
 
 ## Fase 2 — Aprendizagem inteligente (boa parte já feita)
 
