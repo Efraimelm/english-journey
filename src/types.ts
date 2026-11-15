@@ -125,4 +125,5 @@ export interface AppState {
   xp: number
   achievements: Record<string, string>
   theme: 'system' | 'light' | 'dark'
+  plus: Record<string, number> // Plus: frase (minúscula) -> acertos
 }

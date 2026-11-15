@@ -18,6 +18,7 @@ export function emptyState(): AppState {
     xp: 0,
     achievements: {},
     theme: 'system',
+    plus: {},
   }
 }
 

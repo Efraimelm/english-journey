@@ -12,6 +12,7 @@ import { go } from './screens/actions'
 import { Home } from './screens/Home'
 import { Journey, WeekDetail } from './screens/Journey'
 import { Library, TextPage } from './screens/Library'
+import { PlusGroupPage, PlusHome, PlusPractice, PlusWordPage, type Mode } from './screens/Plus'
 import { Progress } from './screens/Progress'
 import { Review } from './screens/Review'
 import { SessionRunner } from './study/SessionRunner'
@@ -62,6 +63,7 @@ const TABS: { to: string; label: string; icon: IconName }[] = [
   { to: '#/biblioteca', label: 'Biblioteca', icon: 'book' },
   { to: '#/revisao', label: 'Revisão', icon: 'repeat' },
   { to: '#/progresso', label: 'Progresso', icon: 'chart' },
+  { to: '#/plus', label: 'Plus', icon: 'spark' },
 ]
 
 export default function App() {
@@ -70,7 +72,7 @@ export default function App() {
   const { session: auth, ready } = useAuth()
   useTheme(s.theme)
   const inSession = hash.startsWith('#/sessao')
-  useStudyTimer(inSession)
+  useStudyTimer(inSession || hash.startsWith('#/plus-treino'))
 
   if (!ready) return <div className="min-h-dvh" />
 
@@ -82,7 +84,7 @@ export default function App() {
   if (inSession) return <SessionRunner onExit={() => go('#/')} onNavigate={go} />
 
   const route = hash.replace(/^#\/?/, '').split('/')
-  const active = '#/' + (route[0] === 'semana' ? 'jornada' : route[0] === 'texto' ? 'biblioteca' : route[0] === 'conta' ? 'progresso' : route[0])
+  const active = '#/' + (route[0] === 'semana' ? 'jornada' : route[0] === 'texto' ? 'biblioteca' : route[0] === 'conta' ? 'progresso' : route[0] === 'plus-treino' ? 'plus' : route[0])
 
   let page
   switch (route[0]) {
@@ -94,6 +96,10 @@ export default function App() {
     case 'revisao': page = <Review />; break
     case 'progresso': page = <Progress />; break
     case 'conta': page = <Account auth={auth} />; break
+    case 'plus':
+      page = route[2] ? <PlusWordPage groupId={route[1]} wordId={route[2]} /> : route[1] ? <PlusGroupPage id={route[1]} /> : <PlusHome />
+      break
+    case 'plus-treino': page = <PlusPractice key={hash} groupId={route[1]} wordId={route[2]} mode={route[3] as Mode} />; break
     default: page = <Home />
   }
 

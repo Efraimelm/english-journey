@@ -5,6 +5,11 @@ const CONTRACTIONS: Record<string, string> = {
   "i'm": 'i am', "you're": 'you are', "he's": 'he is', "she's": 'she is', "it's": 'it is',
   "we're": 'we are', "they're": 'they are', "don't": 'do not', "doesn't": 'does not',
   "isn't": 'is not', "aren't": 'are not', "can't": 'cannot', "what's": 'what is', "that's": 'that is',
+  "i'll": 'i will', "you'll": 'you will', "we'll": 'we will', "they'll": 'they will', "she'll": 'she will', "he'll": 'he will',
+  "i've": 'i have', "you've": 'you have', "we've": 'we have', "they've": 'they have', "i'd": 'i would', "you'd": 'you would',
+  "didn't": 'did not', "won't": 'will not', "haven't": 'have not', "hasn't": 'has not', "wasn't": 'was not',
+  "weren't": 'were not', "couldn't": 'could not', "wouldn't": 'would not', "shouldn't": 'should not',
+  "where's": 'where is', "who's": 'who is', "how's": 'how is', "there's": 'there is', "let's": 'let us',
 }
 
 function normalize(text: string): string[] {
