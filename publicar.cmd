@@ -1,7 +1,7 @@
 @echo off
 rem Publica o English Journey na internet (EAS Hosting).
 rem Na primeira vez, o EAS pode pedir login e perguntar se cria o projeto: responda Y.
-cd /d C:\dev\english-journey
+cd /d "%~dp0"
 set PATH=C:\Program Files\nodejs;%PATH%
 set EAS_NO_VCS=1
 call npm run build || goto erro
