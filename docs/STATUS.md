@@ -34,7 +34,7 @@ Atualizado em 25/11/2026.
 - [x] Semana 5 (Dias, meses e horários) e checagem automática do conteúdo (`npm run check-content`)
 - [x] Semana 6 (Casa e moradia)
 - [x] Plus: trilhas "Inglês do SAP" e "Entrevista em inglês"
-- [ ] Conteúdo das semanas 7–48 (manter 2 semanas prontas à frente)
+- [x] Semanas 7–48 (formato compacto em `src/content/build.ts`): as 960 frases da jornada
 
 ## Fase 4 — Recursos avançados
 
