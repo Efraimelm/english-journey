@@ -4,7 +4,7 @@ import { similarity } from '../lib/compare'
 import { canListen, canSpeak, listen, speak, stopSpeaking } from '../lib/speech'
 import { Icon } from '../ui/Icon'
 
-export function AudioButtons({ text, autoPlay = false, big = false }: { text: string; autoPlay?: boolean; big?: boolean }) {
+export function AudioButtons({ text, autoPlay = false, big = false, onPlay }: { text: string; autoPlay?: boolean; big?: boolean; onPlay?: () => void }) {
   const [playing, setPlaying] = useState<'normal' | 'slow' | null>(null)
   useEffect(() => {
     if (autoPlay) {
@@ -18,6 +18,7 @@ export function AudioButtons({ text, autoPlay = false, big = false }: { text: st
 
   async function play(mode: 'normal' | 'slow') {
     setPlaying(mode)
+    onPlay?.()
     await speak(text, { slow: mode === 'slow' })
     setPlaying(null)
   }

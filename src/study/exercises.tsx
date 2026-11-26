@@ -289,6 +289,7 @@ export function WriteExercise({ phrase, test, onResult }: ExerciseProps) {
   const [tries, setTries] = useState(0)
   const [result, setResult] = useState<CompareResult | null>(null)
   const [status, setStatus] = useState<'answering' | 'retry' | 'right' | 'wrong'>('answering')
+  const [usedAudio, setUsedAudio] = useState(false) // ouvir é uma dica: acerto conta como "difícil"
 
   function check() {
     const r = compareAnswer(value, phrase.en)
@@ -305,13 +306,17 @@ export function WriteExercise({ phrase, test, onResult }: ExerciseProps) {
     }
   }
 
-  const quality: Quality = status === 'right' ? (tries > 1 || result?.verdict === 'almost' ? 1 : 2) : 0
+  const quality: Quality = status === 'right' ? (tries > 1 || usedAudio || result?.verdict === 'almost' ? 1 : 2) : 0
 
   return (
     <div>
       <Eyebrow>Escrita</Eyebrow>
       <h2 className="mt-3 text-[15px] text-muted">Escreva em inglês:</h2>
-      <p className="mb-6 text-[26px] leading-snug font-bold tracking-tight">{phrase.pt}</p>
+      <p className="mb-4 text-[26px] leading-snug font-bold tracking-tight">{phrase.pt}</p>
+      <div className="mb-6">
+        <div className="mb-2 text-sm text-muted">Na dúvida? Ouça em inglês e escreva o que escutou:</div>
+        <AudioButtons text={phrase.en} onPlay={() => setUsedAudio(true)} />
+      </div>
       <textarea
         value={value}
         onChange={(e) => {
