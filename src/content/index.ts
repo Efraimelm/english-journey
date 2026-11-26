@@ -5,9 +5,10 @@ import { week3 } from './week3'
 import { week4 } from './week4'
 import { week5 } from './week5'
 import { week6 } from './week6'
+import { weeks07to12 } from './weeks07-12'
 
 /** Semanas com conteúdo publicado. Para publicar uma nova semana, crie weekN.ts e adicione aqui. */
-export const WEEKS: Week[] = [week1, week2, week3, week4, week5, week6]
+export const WEEKS: Week[] = [week1, week2, week3, week4, week5, week6, ...weeks07to12]
 
 const outline: [string, WeekOutline['level']][] = [
   ['Apresentações e cumprimentos', 'A1'], ['Números e informações pessoais', 'A1'], ['Família', 'A1'],
