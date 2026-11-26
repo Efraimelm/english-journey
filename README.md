@@ -28,7 +28,17 @@ cmd /c npm run build         # gera a versão final em dist/
 
 1. Copie `src/content/week4.ts` para `week5.ts` e troque o conteúdo (20 frases, texto, 4 perguntas).
 2. Em `src/content/index.ts`, importe e adicione em `WEEKS`.
-3. Confira que cada `blank.word` aparece na frase e que o texto usa as frases da semana.
+3. Rode `cmd /c npm run check-content`. Ele confere sozinho: ids, 20 frases, palavra do "complete" dentro da frase, texto usando as frases da semana e perguntas válidas. O `npm run build` também roda essa checagem e para se houver erro.
+
+## Os apps da rotina
+
+| App | Papel |
+| --- | --- |
+| **English Journey** (este) | Frases da semana, exercícios, revisão espaçada e teste semanal |
+| [Inglês Todo Dia](https://efraimelm.github.io/ingles-todo-dia/#hoje) | Texto/missão do dia, escuta e fala (360 dias) |
+| Central de Estudos (artifact no Claude) | Agenda do dia: diz qual app abrir em cada horário |
+
+Os dois apps usam o mesmo projeto Supabase e a mesma conta. Cada um lê o progresso do outro (só leitura) para mostrar em que ponto você está.
 
 ## Ativar conta e sincronização
 

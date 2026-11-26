@@ -1,6 +1,6 @@
 # Status do desenvolvimento
 
-Atualizado em 30/10/2026.
+Atualizado em 25/11/2026.
 
 ## Fase 1 — MVP ✅ (código pronto)
 
@@ -28,9 +28,11 @@ Atualizado em 30/10/2026.
 - [x] Biblioteca: frases, favoritas, textos, vocabulário, busca
 - [x] 12 conquistas
 - [x] Funciona offline depois do primeiro acesso (PWA)
-- [x] Sincronização entre aparelhos (precisa do Supabase configurado)
+- [x] Sincronização entre aparelhos que junta o progresso dos dois (não sobrescreve)
+- [x] Ligação com o Inglês Todo Dia (mesma conta): cartão na tela inicial com o dia atual de lá
 - [ ] Painel administrativo
-- [ ] Conteúdo das semanas 5–48
+- [x] Semana 5 (Dias, meses e horários) e checagem automática do conteúdo (`npm run check-content`)
+- [ ] Conteúdo das semanas 6–48
 
 ## Fase 4 — Recursos avançados
 

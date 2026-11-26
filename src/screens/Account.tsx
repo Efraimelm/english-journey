@@ -72,7 +72,7 @@ export function Account({ auth }: { auth: AuthSession | null }) {
           variant="danger"
           onClick={() => {
             if (confirm('Tem certeza? Todo o seu progresso será apagado.')) {
-              replaceState({ ...emptyState(), theme: s.theme, name: s.name })
+              replaceState({ ...emptyState(), theme: s.theme, name: s.name, resetAt: Date.now() })
               update((st) => st) // envia o estado zerado para a nuvem
               go('#/')
             }

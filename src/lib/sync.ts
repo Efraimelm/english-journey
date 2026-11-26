@@ -3,7 +3,8 @@
 import { createClient, type Session as AuthSession } from '@supabase/supabase-js'
 import { useEffect, useState } from 'react'
 import type { AppState } from '../types'
-import { getState, onChange, replaceState } from './store'
+import { mergeStates } from './merge'
+import { emptyState, getState, onChange, replaceState } from './store'
 
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined
 const key = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
@@ -72,7 +73,7 @@ async function push(state: AppState) {
   setStatus(error ? (navigator.onLine ? 'error' : 'offline') : 'synced')
 }
 
-/** Ao entrar: o progresso mais recente vence (nuvem ou aparelho). */
+/** Ao entrar ou voltar ao app: junta o progresso da nuvem com o do aparelho (nada estudado se perde). */
 async function pull() {
   if (!supabase || !userId) return
   setStatus('syncing')
@@ -80,11 +81,23 @@ async function pull() {
   if (error) return setStatus(navigator.onLine ? 'error' : 'offline')
   const local = getState()
   const remote = data?.data as AppState | undefined
-  if (remote && (remote.updatedAt ?? 0) > local.updatedAt) {
-    replaceState(remote)
-    setStatus('synced')
-  } else {
-    await push(local)
+  if (!remote) return push(local)
+  const merged = mergeStates(local, { ...emptyState(), ...remote })
+  if (JSON.stringify(merged) !== JSON.stringify(local)) replaceState(merged)
+  if (JSON.stringify(merged) !== JSON.stringify(remote)) await push(getState())
+  else setStatus('synced')
+}
+
+/** Lê o progresso de outro app da mesma conta (ex.: Inglês Todo Dia). Só leitura. */
+export async function readOtherApp<T>(table: string): Promise<T | null> {
+  if (!supabase) return null
+  try {
+    const uid = (await supabase.auth.getSession()).data.session?.user.id
+    if (!uid) return null
+    const { data, error } = await supabase.from(table).select('data').eq('user_id', uid).maybeSingle()
+    return error ? null : ((data?.data as T) ?? null)
+  } catch {
+    return null // sem internet
   }
 }
 

@@ -114,6 +114,8 @@ export interface DayActivity {
 export interface AppState {
   version: 1
   updatedAt: number
+  /** Quando o aluno apagou o progresso (vence o progresso antigo de outro aparelho). */
+  resetAt?: number
   name: string
   days: Record<string, string> // "w1d3" -> data de conclusão
   session?: Session

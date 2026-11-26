@@ -126,7 +126,7 @@ export const week4: Week = {
     title: 'My Day',
     titlePt: 'O meu dia',
     sentences: [
-      { en: "I wake up at six o'clock.", pt: 'Eu acordo às seis horas.' },
+      { en: "My name is Ana. I wake up at six o'clock.", pt: 'Meu nome é Ana. Eu acordo às seis horas.' },
       { en: 'I take a shower in the morning and I have breakfast at seven.', pt: 'Eu tomo banho de manhã e tomo café da manhã às sete.' },
       { en: 'I usually drink coffee.', pt: 'Eu geralmente bebo café.' },
       { en: 'I go to work by bus.', pt: 'Eu vou para o trabalho de ônibus.' },
@@ -147,7 +147,7 @@ export const week4: Week = {
     glossary: {
       and: 'e', sister: 'irmã', nurse: 'enfermeira', friend: 'amigo', teacher: 'professor', saturday: 'sábado',
       saturdays: 'sábados', asks: 'pergunta', me: 'me / mim', at: 'às', no: 'não', late: 'tarde (depois do normal)',
-      bia: 'Bia (nome)', mark: 'Mark (nome)', today: 'hoje', six: 'seis', you: 'você',
+      bia: 'Bia (nome)', ana: 'Ana (nome)', name: 'nome', mark: 'Mark (nome)', today: 'hoje', six: 'seis', you: 'você',
     },
     questions: [
       { q: 'A que horas a Ana acorda durante a semana?', options: ['Às 6h', 'Às 7h', 'Às 8h'], answer: 0 },

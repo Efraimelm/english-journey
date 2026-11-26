@@ -5,6 +5,7 @@ import { formatMinutes, today } from '../lib/util'
 import { Icon } from '../ui/Icon'
 import { Bar, Button, Card, Eyebrow, Ring } from '../ui/kit'
 import { go, resumeSession, startDay, startReview } from './actions'
+import { CompanionCard } from './Companion'
 
 function greeting() {
   const h = new Date().getHours()
@@ -98,6 +99,8 @@ export function Home() {
           <Icon name="chevron" className="text-muted" />
         </Card>
       </div>
+
+      <CompanionCard />
 
       {/* Progresso anual */}
       <Card onClick={() => go('#/jornada')}>
