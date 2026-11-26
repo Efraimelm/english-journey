@@ -24,9 +24,12 @@ export interface PlusGroup {
   id: string
   title: string
   subtitle: string
-  icon: 'search' | 'user' | 'pen' | 'path' | 'clock'
+  icon: IconName
   words: PlusWord[]
 }
+
+import type { IconName } from '../ui/Icon'
+import { INTERVIEW, SAP_WORK } from './plusWork'
 
 const p = (form: string, pt: string, lines: string): PlusPattern => ({
   form,
@@ -1063,6 +1066,8 @@ export const PLUS_GROUPS: PlusGroup[] = [
   { id: 'verbos', title: 'Verbos essenciais', subtitle: 'Want, Need, Get, Make... com passado e expressões', icon: 'pen', words: VERBS },
   { id: 'conectores', title: 'Conectores', subtitle: 'And, But, Because, If... para frases maiores', icon: 'path', words: CONNECTORS },
   { id: 'tempo', title: 'Frequência e tempo', subtitle: 'Always, Never, Already, Yet... e onde colocar', icon: 'clock', words: TIME },
+  { id: 'sap', title: 'Inglês do SAP', subtitle: 'Ordens, remessas, bloqueios, preço, chamados e reuniões', icon: 'chart', words: SAP_WORK },
+  { id: 'entrevista', title: 'Entrevista em inglês', subtitle: 'Seu pitch, um caso real e as perguntas do final', icon: 'mic', words: INTERVIEW },
 ]
 
 export const getPlusGroup = (id: string) => PLUS_GROUPS.find((g) => g.id === id)

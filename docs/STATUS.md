@@ -32,7 +32,9 @@ Atualizado em 25/11/2026.
 - [x] Ligação com o Inglês Todo Dia (mesma conta): cartão na tela inicial com o dia atual de lá
 - [ ] Painel administrativo
 - [x] Semana 5 (Dias, meses e horários) e checagem automática do conteúdo (`npm run check-content`)
-- [ ] Conteúdo das semanas 6–48
+- [x] Semana 6 (Casa e moradia)
+- [x] Plus: trilhas "Inglês do SAP" e "Entrevista em inglês"
+- [ ] Conteúdo das semanas 7–48 (manter 2 semanas prontas à frente)
 
 ## Fase 4 — Recursos avançados
 
